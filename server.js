@@ -8,6 +8,8 @@ const testJwtRouter = require('./controllers/test-jwt');
 const authRouter = require('./controllers/auth');
 const usersRouter = require('./controllers/users');
 
+const verifyToken = require('./middleware/verify-token');
+
 dotenv.config();
 
 const app = express();
@@ -23,7 +25,7 @@ app.use(express.json());
 app.use(logger('dev'));
 
 app.use('/auth', authRouter);
-app.use('/users', usersRouter);
+app.use('/users', verifyToken, usersRouter);
 app.use('/test-jwt', testJwtRouter);
 
 app.listen(3000, () => {
