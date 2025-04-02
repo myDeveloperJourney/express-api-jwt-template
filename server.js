@@ -5,6 +5,7 @@ const cors = require('cors');
 const logger = require('morgan');
 
 const testJwtRouter = require('./controllers/test-jwt');
+const authRouter = require('./controllers/auth');
 
 dotenv.config();
 
@@ -20,6 +21,7 @@ app.use(cors());
 app.use(express.json());
 app.use(logger('dev'));
 
+app.use('/auth', authRouter);
 app.use('/test-jwt', testJwtRouter);
 
 app.listen(3000, () => {
