@@ -4,6 +4,8 @@ const mongoose = require('mongoose');
 const cors = require('cors');
 const logger = require('morgan');
 
+const testJwtRouter = require('./controllers/test-jwt');
+
 dotenv.config();
 
 const app = express();
@@ -17,6 +19,8 @@ mongoose.connection.on('connected', () => {
 app.use(cors());
 app.use(express.json());
 app.use(logger('dev'));
+
+app.use('/test-jwt', testJwtRouter);
 
 app.listen(3000, () => {
     console.log('The express app is ready!');
